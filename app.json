@@ -1,5 +1,5 @@
 {
-  "name": "SONIC-MD",
+  "name": "BUTTER-QUEEN-MD",
   "description": "A WHATSAPP MD BOT CREATED BY KALINDU...",
   "logo": "https://i.ibb.co/ccb1QTf/Ephoto360-com-164d4f4eb43109.jpg",
   "keywords": ["whatsappbot", "suhailMd", "suhail Md Wa bot", "Suhail-Md", "SuhailMdWhatsaooBot", "SuhailWaBot","SuhailMD","Suhail Md Whatsapp Bot","multi device"],
@@ -59,7 +59,7 @@
     "value": "94758179948"
   },
    "SESSION_ID": {
-    "description": "Please put your SESSION_ID here,if you don't have visit\nhttps://replit.com/@SuhailTechInfo/Secktor-Bot"
+    "description": "Please put your SESSION_ID here,if you don't have visit\nhttps://replit.com/@KaliduGaweshana/BUTTER-QUEEN-MD"
   },
   "OPENAI_API_KEY": {
     "description": "Please put your OPENAI api key here.Get it from beta.openai.com ",
