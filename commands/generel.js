@@ -219,14 +219,20 @@ cmd({
     },
     async(Void, citel) => {
         let { data } = await axios.get('https://api.github.com/repos/SuhailTechInfo/Secktor-bot')
-        let cap = `
-*⭐ Total Stars:* ${data.stargazers_count} stars
-*🍽️ Forks:* ${data.forks_count} forks
-*🍁 Repo:* _https://github.com/SuhailTechInfo/Secktor-bot_
-*🧩 Scan:* _https://replit.com/@SuhailTechInfo/Secktor-Bot_
-\n*Visit For Tutorial :-*
- _https://www.Youtube.com/c/SuhailTechInfo_
-\n\n${Config.caption}`
+        let cap = `Hey ${citel.pushName}
+
+╔════◇
+║ _ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ-ᴍᴅ-ɢɪᴛʜᴜʙ-ʟɪɴᴋ_ 💃
+║ _ᴄʀᴀᴇᴛᴇᴅ ʙʏ ᴋᴀʟɪɴᴅᴜ 🧚‍♂️._
+╚═════════════════◉
+
+╔═════◇
+║    
+║     *ᴏᴡɴᴇʀ:* _wa.me//+94758179948_
+║
+║     *ʀᴇᴘᴏ ʟɪɴᴋ:*  github.com/KALINDU-LK/BUTTER-QUEEN-MD
+║
+╚═════════════════◉`
 	
         let buttonMessaged = {   image: { url: await botpic() },    caption: cap,  };   
         return await Void.sendMessage(citel.chat, buttonMessaged, {   quoted: citel, });
