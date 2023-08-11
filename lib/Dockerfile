@@ -1,6 +1,6 @@
 FROM quay.io/sampandey001/secktor
-RUN git clone https://github.com/SuhailTechInfo/Secktor-bot /root/SuhailTech_BOt
-WORKDIR /root/SuhailTech_BOt/
+RUN git clone https://github.com/KALINDU-LK/BUTTER-QUEEN-MD /root/KALINDU-LK
+WORKDIR /root/KALINDU-LK/
 RUN npm install npm@latest
 RUN yarn install --network-concurrency 1
 EXPOSE 8000
