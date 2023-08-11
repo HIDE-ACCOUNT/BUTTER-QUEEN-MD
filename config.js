@@ -1,1 +1,64 @@
-const _0x1e42e4=_0x31d5;(function(_0x1ec59c,_0xd775ae){const _0x910d06=_0x31d5,_0x412b0f=_0x1ec59c();while(!![]){try{const _0x394a2d=parseInt(_0x910d06(0x18d))/0x1+-parseInt(_0x910d06(0x1ae))/0x2*(parseInt(_0x910d06(0x1b2))/0x3)+-parseInt(_0x910d06(0x195))/0x4*(parseInt(_0x910d06(0x191))/0x5)+parseInt(_0x910d06(0x1ac))/0x6+parseInt(_0x910d06(0x1aa))/0x7*(-parseInt(_0x910d06(0x1bb))/0x8)+-parseInt(_0x910d06(0x18f))/0x9*(parseInt(_0x910d06(0x18b))/0xa)+-parseInt(_0x910d06(0x1af))/0xb*(-parseInt(_0x910d06(0x199))/0xc);if(_0x394a2d===_0xd775ae)break;else _0x412b0f['push'](_0x412b0f['shift']());}catch(_0x244639){_0x412b0f['push'](_0x412b0f['shift']());}}}(_0x13e3,0xd70a1));const fs=require(_0x1e42e4(0x1b6));if(fs[_0x1e42e4(0x1b7)](_0x1e42e4(0x1b9)))require(_0x1e42e4(0x1b0))[_0x1e42e4(0x176)]({'path':__dirname+'/config.env'});function _0x13e3(){const _0x327c59=['PORT','SECKTOR','fs-extra','existsSync','DISABLE_PM','config.env','split','1048840FekvCJ','MONGODB_URI','WARN_COUNT','https://github.com/SamPandey001/Secktor-Md','AUTO_READ_STATUS','ANTI_BAD_WORD','cache','SUDO','VERSION','nbwoed','config','THUMB_IMAGE','OPENAI_API_KEY','main','https://raw.githubusercontent.com/SecktorBot/Brandimages/main/logos/SocialLogo%201.png','devs','HEROKU_APP_NAME','ANTILINK_VALUES','chat.whatsapp.com','resolve','SamPandey001','gurl','919628516236','FAKE_COUNTRY_CODE','remove','sudo','owner','heroku','sam@secktor.live','BOT_NAME','AUTO_BIO','10COxZNE','AUTO_STATUS_SAVER','462780WNApCj','PACK_INFO','4369590WAVsQj','email','3170pwFwUH','https://instagram.com/','unwatchFile','PREFIX','3532RcEeTc','website','v.0.0.3','public','12ADjoFv','ALIVE_MESSAGE','LEVEL_UP_MESSAGE','OWNER_NUMBER','SESSION_ID','1abfce1e-1bee-4334-9f6c-f4c1cb1cafab','ALWAYS_ONLINE','zeropgg','READ_MESSAGE','AUTO_REACTION','WORKTYPE','mongodb','Update\x27','location','HEROKU','OWNER_NAME','971','14klQtsT','Secktor-Md','5282466Skfvrl','ANTILINK_ACTION','2PtXtTD','21597081DUeEGw','dotenv','Sultanpur\x20IN','3354657jSRlOk','env'];_0x13e3=function(){return _0x327c59;};return _0x13e3();}global[_0x1e42e4(0x186)]=process['env'][_0x1e42e4(0x19c)][_0x1e42e4(0x1ba)](','),global[_0x1e42e4(0x1a4)]=process['env'][_0x1e42e4(0x1bc)]||'mongodb+srv://sam:sam@cluster0.u1smxsv.mongodb.net/?retryWrites=true&w=majority',global['port']=process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1b4)]||0x1388,global[_0x1e42e4(0x190)]=_0x1e42e4(0x188),global['github']=_0x1e42e4(0x1be),global[_0x1e42e4(0x1a6)]=_0x1e42e4(0x1b1),global[_0x1e42e4(0x181)]=_0x1e42e4(0x192),global[_0x1e42e4(0x185)]=process[_0x1e42e4(0x1b3)][_0x1e42e4(0x173)]||_0x1e42e4(0x182),global[_0x1e42e4(0x17b)]=_0x1e42e4(0x182),global[_0x1e42e4(0x196)]=_0x1e42e4(0x1be),global[_0x1e42e4(0x177)]=process[_0x1e42e4(0x1b3)][_0x1e42e4(0x177)]||_0x1e42e4(0x17a),module['exports']={'botname':process['env'][_0x1e42e4(0x189)]===undefined?'𝐒𝐞𝐜𝐤𝐭𝐨𝐫\x20𝐁𝐨𝐭𝐭𝐨':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x189)],'ownername':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a8)]===undefined?_0x1e42e4(0x180):process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a8)],'sessionName':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x19d)]===undefined?![]:process[_0x1e42e4(0x1b3)]['SESSION_ID'],'author':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x18e)][_0x1e42e4(0x1ba)](';')[0x0]===undefined?_0x1e42e4(0x180):process['env'][_0x1e42e4(0x18e)]['split'](';')[0x0],'auto_read_status':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1bf)]===undefined?![]:process['env']['AUTO_READ_STATUS'],'packname':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x18e)][_0x1e42e4(0x1ba)](';')[0x1]===undefined?_0x1e42e4(0x1ab):process[_0x1e42e4(0x1b3)][_0x1e42e4(0x18e)][_0x1e42e4(0x1ba)](';')[0x1],'autoreaction':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a2)]===undefined?![]:process['env'][_0x1e42e4(0x1a2)],'antibadword':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x171)]===undefined?_0x1e42e4(0x175):process[_0x1e42e4(0x1b3)]['ANTI_BAD_WORD'],'alwaysonline':process['env'][_0x1e42e4(0x19f)]===undefined?![]:process[_0x1e42e4(0x1b3)][_0x1e42e4(0x19f)],'antifake':process['env'][_0x1e42e4(0x183)]===undefined?_0x1e42e4(0x1a9):process['env'][_0x1e42e4(0x183)],'readmessage':process[_0x1e42e4(0x1b3)]['READ_MESSAGE']===undefined?![]:process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a1)],'auto_status_saver':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x18c)]===undefined?![]:process[_0x1e42e4(0x1b3)]['AUTO_STATUS_SAVER'],'HANDLERS':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x194)]===undefined?['.']:process[_0x1e42e4(0x1b3)][_0x1e42e4(0x194)],'warncount':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1bd)]===undefined?0x3:process[_0x1e42e4(0x1b3)]['WARN_COUNT'],'disablepm':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1b8)]===undefined?![]:process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1b8)],'levelupmessage':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x19b)]===undefined?![]:process['env'][_0x1e42e4(0x19b)],'antilink':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x17d)]===undefined?_0x1e42e4(0x17e):process[_0x1e42e4(0x1b3)]['ANTILINK_VALUES'],'antilinkaction':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1ad)]===undefined?_0x1e42e4(0x184):process['env']['ANTILINK_ACTION'],'BRANCH':_0x1e42e4(0x179),'ALIVE_MESSAGE':process[_0x1e42e4(0x1b3)]['ALIVE_MESSAGE']===undefined?'':process['env'][_0x1e42e4(0x19a)],'autobio':process['env'][_0x1e42e4(0x18a)]===undefined?![]:process[_0x1e42e4(0x1b3)][_0x1e42e4(0x18a)],'OPENAI_API_KEY':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x178)]===undefined?![]:process[_0x1e42e4(0x1b3)]['OPENAI_API_KEY'],'heroku':process[_0x1e42e4(0x1b3)]['heroku']===undefined?![]:process['env'][_0x1e42e4(0x187)],'HEROKU':{'HEROKU':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a7)]||![],'API_KEY':process['env']['HEROKU_API_KEY']===undefined?_0x1e42e4(0x19e):process[_0x1e42e4(0x1b3)]['HEROKU_API_KEY'],'APP_NAME':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x17c)]===undefined?_0x1e42e4(0x1a0):process['env']['HEROKU_APP_NAME']},'VERSION':process[_0x1e42e4(0x1b3)][_0x1e42e4(0x174)]===undefined?_0x1e42e4(0x197):process['env'][_0x1e42e4(0x174)],'LANG':process[_0x1e42e4(0x1b3)]['THEME']||_0x1e42e4(0x1b5),'WORKTYPE':process['env'][_0x1e42e4(0x1a3)]===undefined?_0x1e42e4(0x198):process[_0x1e42e4(0x1b3)][_0x1e42e4(0x1a3)]};function _0x31d5(_0x2eea6c,_0x57cf51){const _0x13e33f=_0x13e3();return _0x31d5=function(_0x31d5a3,_0x102ae1){_0x31d5a3=_0x31d5a3-0x171;let _0x253094=_0x13e33f[_0x31d5a3];return _0x253094;},_0x31d5(_0x2eea6c,_0x57cf51);}let file=require[_0x1e42e4(0x17f)](__filename);fs['watchFile'](file,()=>{const _0x58c867=_0x1e42e4;fs[_0x58c867(0x193)](file),console['log'](_0x58c867(0x1a5)+__filename+'\x27'),delete require[_0x58c867(0x172)][file],require(file);});
+const fs = require('fs-extra')
+if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/config.env' })
+
+
+//═══════[Required Variables]════════\\
+global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, ''): '94758179948';
+global.mongodb = process.env.MONGODB_URI || "mongodb+srv://Suhail_Md:Suhail_Md@cluster1.0tlyzhm.mongodb.net/?retryWrites=true&w=majority" ;
+global.port=5000  ;
+global.audio = '' ; 
+global.video = '' ;
+global.blockJids = process.env.BLOCK_JID ||'120363162305531586@g.us' ;
+global.allowJids = process.env.ALLOW_JID ||'120363022922797633@g.us' ;
+global.email = 'samsamsun789@gmail.com' ;
+global.github = 'https://github.com/KALINDU-LK/BUTTER-QUEEN-MD' ;
+global.location = 'Lahore Pakistan' ;
+global.timezone  = process.env.TIME_ZONE || 'Asia/Karachi'
+global.gurl = 'https://youtube.com/c/kalidu-officail' ; // add your username
+global.sudo =  process.env.SUDO || "923184474176" ;
+global.devs = "94758179948"; //Dont change it From here
+global.website = 'https://github.com/KALINDU-LK/BUTTER-QUEEN-MD' ; //wa.me/+91000000000000
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.imgur.com/NpA3ZsJ.jpeg' ;
+module.exports = {
+  sessionName: process.env.SESSION_ID || '',      //Put Your Session Id Here
+  botname: process.env.BOT_NAME || 'ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ²²¹-ᴍᴅ',
+  botbgm: process.env.BOT_BGM || 'false',
+  ownername:  process.env.OWNER_NAME || `It'x Kalindu`,
+  author:  process.env.PACK_AUTHER || '', 
+  read_status : process.env.AUTO_READ_STATUS || 'true',
+  save_status : process.env.AUTO_SAVE_STATUS || 'true',
+  packname:  process.env.PACK_NAME || "\t   𓅋 𓃮 \n\nᴋɪss ʍᴇ...💋\n\nᴄʟօsᴇ ყσυɾ ᴇყᴇs...👁️🙈\n\nʍɪss ʍᴇ...♥️\n\n\n   -ᴘʟᴇᴀsᴇ ᴅᴏɴ'ᴛ ᴛᴀӄᴇ 🚮 \n\n--- ρυвʟɪᴄ вσт нᴇʀᴇ ---" ,
+  autoreaction: process.env.AUTO_REACTION || 'false',
+  antibadword : process.env.ANTI_BAD_WORD || 'nobadwordokeyuntillYouPutAnWordHere',
+  alwaysonline: process.env.ALWAYS_ONLINE || 'false',
+  antifake :   process.env.FAKE_COUNTRY_CODE ||'212',
+  readmessage: process.env.READ_MESSAGE || 'false',
+  readcmds : process.env.READ_COMMANDS || 'false',
+  HANDLERS: process.env.PREFIX || ',',
+  warncount : process.env.WARN_COUNT || 3,
+  disablepm: process.env.DISABLE_PM || "true",
+  MsgsInLog:process.env.MSGS_IN_LOG ||'false',
+  pmMsgsInLog:process.env.PM_MSGS_IN_LOGS ||'false',
+  levelupmessage: process.env.LEVEL_UP_MESSAGE || 'false',
+  antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com',
+  //antilinkaction: process.env.BRANCH || 'remove',
+  BRANCH: process.env.BRANCH || 'main',
+  HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
+  HEROKU_API_KEY: process.env.HEROKU_API_KEY,
+  REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || "Nh4iTxEH5k3vmHugFqoYktGM",
+  caption :process.env.CAPTION || "\t*•ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ²²¹-ᴍᴅ•* ",   //*『sᴜʙsᴄʀɪʙᴇ • ᴋᴀʟɪᴅᴜ ᴛᴇᴄʜ』*\n youtube.com/@kaliduofficial"),
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY ||'' ,
+  VERSION: process.env.VERSION || 'v.0.0.3',
+  LANG: process.env.THEME || 'BUTTER-QUEEN-MD',
+  menu : process.env.MENU || '', /**  Available @MENU @Schemes 1: Aztec_Md, 2: A17_Md, 3: Butter-queen-Md Default ---------- If Not Choose then it Randomely Pic One Of Them Each time **/
+  WORKTYPE: process.env.WORKTYPE || process.env.MODE || 'public'
+};
+
+
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(`Update'${__filename}'`)
+    delete require.cache[file]
+	require(file)
+})
