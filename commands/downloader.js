@@ -477,7 +477,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "play",
+            pattern: "song",
             alias: ["music"],
             desc: "Sends info about the query(of youtube video/audio).",
             category: "downloader",
@@ -486,7 +486,7 @@ cmd({
         },
 async(Void, citel, text) => {
    const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };    
-   if (text.length == 0 && !citel.quoted) return citel.reply(`Give Song Name, Ex ${prefix}play back in black*`);
+   if (text.length == 0 && !citel.quoted) return citel.reply(`Give Song Name, Ex ${prefix}song back in black*`);
    try {
             let urlYt = text;
             if(!text){ text=citel.quoted.text; }
@@ -501,7 +501,7 @@ async(Void, citel, text) => {
             let infoYt = await ytdl.getInfo(urlYt);
             if (infoYt.videoDetails.lengthSeconds >= 1200) return citel.reply(`*song not Found, Try Differ Name*`);
             let titleYt = infoYt.videoDetails.title;   
-	    citel.reply(`_Downloading ${infoYt.videoDetails.title}?_`);
+	    citel.reply(`╭───────────────◆\n│🎗️\n│🎗️ *BUTTER-QUEEN* 🦚\n│🎗️ \n│🎗️ *SONG DOWN*\n│🎗️\n│🎗️ *TITLE: _${infoYt.videoDetails.title}?_  *\n│🎗️ \n╰────────────────◆\n\n  ⦿ *CREATED BY KALINDU* 🧚‍♂️`);
             let randomName = getRandom(".mp3");
             const stream = ytdl(urlYt, {
                  filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128, })
@@ -657,7 +657,7 @@ let result4 = ` *Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
     //---------------------------------------------------------------------------
 
 cmd({
-            pattern: "song",
+            pattern: "play",
             alias: ["audio"],
             desc: "Downloads audio from youtube.",
             category: "downloader",
@@ -953,7 +953,7 @@ cmd({
 
 
 /*cmd({
-    pattern: "song",
+    pattern: "play",
     desc: "Search Song From youtube",
     category: "downloader",
     filename: __filename,
