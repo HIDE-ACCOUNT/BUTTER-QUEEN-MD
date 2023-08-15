@@ -48,7 +48,7 @@ cmd({
                         thumbnail: log0,
                         mediaType: 2,
                         mediaUrl: `https://i.imgur.com/NpA3ZsJ.jpeg`,
-                        sourceUrl: `WWW.YOUTUBE.COM/c/SUHAILTECHINFO`,
+                        sourceUrl: `WWW.YOUTUBE.COM/c/kalidu-official`,
                     },
 
                 },
