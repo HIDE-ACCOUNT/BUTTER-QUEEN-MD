@@ -436,7 +436,7 @@ cmd({
 		let buttonMessage = {
                         video: fs.readFileSync(`./${randomName}`),
                         mimetype: 'video/mp4',
-                        caption: "  Here's Your Video" + Config.caption ,
+                        caption: "💃 BUTTER-QUEEN-MD 💃\n💜CREATED BY KALINDU" + Config.caption ,
                     }
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
@@ -501,7 +501,7 @@ async(Void, citel, text) => {
             let infoYt = await ytdl.getInfo(urlYt);
             if (infoYt.videoDetails.lengthSeconds >= 1200) return citel.reply(`*song not Found, Try Differ Name*`);
             let titleYt = infoYt.videoDetails.title;   
-	    citel.reply(`╭───────────────◆\n│🎗️\n│🎗️ *BUTTER-QUEEN* 🦚\n│🎗️ \n│🎗️ *SONG DOWN*\n│🎗️\n│🎗️ *TITLE: _${infoYt.videoDetails.title}?_  *\n│🎗️ \n╰────────────────◆\n\n  ⦿ *CREATED BY KALINDU* 🧚‍♂️`);
+	    citel.reply(`╭───────────────◆\n│🎗️\n│🎗️ *💃 BUTTER-QUEEN-MD 💃* 🦚\n│🎗️ \n│🎗️ *SONG DOWNLOAD*\n│🎗️\n│🎗️ *TITLE: _${infoYt.videoDetails.title}?_*\n│🎗️ \n╰────────────────◆\n\n  ⦿ *CREATED BY KALINDU* 🧚‍♂️`);
             let randomName = getRandom(".mp3");
             const stream = ytdl(urlYt, {
                  filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128, })
@@ -670,7 +670,7 @@ cmd({
                 let yts = require("secktor-pack")
                 let search = await yts(text);
                 let i = search.all[1] ;
-                let cap = "\t *BUTTER-QUEEN-MD-YT-SEARCH*   \n\n 💃 TITLE : " + i.title + "\n 💃 URL : " + i.url +"\n 💃 DESCRIPTION : " + i.timestamp +"\n 💃 VIEWS : "+i.views +"\n 💃 UPLOADED : " +i.ago +"\n 💃 AUTHOR : "+i.author.name+"\n\n\n 💛 REPLY 1 TO VIDEO \n 💛 REPLY 2 TO AUDIO" ;
+                let cap = "\t *BUTTER-QUEEN-MD-YT-SEARCH*   \n\n 💃 TITLE : " + i.title + "\n 💃 URL : " + i.url +"\n 💃 DESCRIPTION : " + i.timestamp +"\n 💃 VIEWS : "+i.views +"\n 💃 UPLOADED : " +i.ago +"\n 💃 AUTHOR : "+i.author.name+"\n\n\n 💛" ;
                 Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
            
            
@@ -963,7 +963,7 @@ async(Void, citel, text) => {
 if (!text) return await citel.reply(`*_Ohh PLease, Give Me Song Name_*`);
 let search = await yts(text)
 let i = search.all[1] ;
-let cap = \t *BUTTER-QUEEN-MD-YT-SEARCH*   \n\n 💃 TITLE : " + i.title + "\n 💃 URL : " + i.url +"\n 💃 DESCRIPTION : " + i.timestamp +"\n 💃 VIEWS : "+i.views +"\n 💃 UPLOADED : " +i.ago +"\n 💃 AUTHOR : "+i.author.name+"\n\n\n 💛 REPLY 1 TO VIDEO \n 💛 REPLY 2 TO AUDIO"" ;
+let cap = \t *BUTTER-QUEEN-MD-YT-SEARCH*   \n\n 💃 TITLE : " + i.title + "\n 💃 URL : " + i.url +"\n 💃 DESCRIPTION : " + i.timestamp +"\n 💃 VIEWS : "+i.views +"\n 💃 UPLOADED : " +i.ago +"\n 💃 AUTHOR : "+i.author.name+"\n\n\n 💛" ;
 Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap })
 })
 */
