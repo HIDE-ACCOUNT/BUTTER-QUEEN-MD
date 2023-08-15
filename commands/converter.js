@@ -380,16 +380,16 @@ cmd({
             pattern: "fancy",
             desc: "Makes stylish/fancy given text",
             category: "converter",
-            use: '56 Secktor',
+            use: '56 BUTTER-QUEEN',
             react: "✅",
             filename: __filename
         },
         async(Void, citel, text) => {
             if (isNaN(text.split(" ")[0]) || !text) {
                 let text = tiny(
-                    "Fancy text generator\n\n*_______________________________*\n*Example: .fancy 32 Suhail Md*\n*_______________________________*\n\n"
+                    "Fancy text generator\n\n*_______________________________*\n*Example: .fancy 32 BUTTER-QUEEN-MD*\n*_______________________________*\n\n"
                 );
-                listall("Secktor").forEach((txt, num) => {
+                listall("BUTTER-QUEEN").forEach((txt, num) => {
                     text += `${(num += 1)} ${txt}\n`;
                 });
                 return await citel.reply(text);
