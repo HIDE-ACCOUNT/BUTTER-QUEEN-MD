@@ -1,5 +1,5 @@
 const { tlang, botpic, cmd, prefix, runtime, Config, formatp, fetchJson } = require('../lib');
-const apikey = 'Tg2Lyda5' ;
+const apikey = 'xvideos-scraper' ;
 cmd({
   pattern: "xn",
   alias: ["xt"],
