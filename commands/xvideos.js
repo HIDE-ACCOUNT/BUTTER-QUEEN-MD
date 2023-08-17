@@ -1,5 +1,7 @@
-const { tlang, botpic, cmd, prefix, runtime, Config, formatp, fetchJson } = require('../lib');
-const apikey = 'xvideos-scraper' ;
+const { tlang, botpic, cmd, prefix, runtime, Config, formatp, fetchJson } = require('../lib')
+const Esana = require('xvideos-scraper');
+var api = new Xvideo()
+
 cmd({
   pattern: "xn",
   alias: ["xt"],
