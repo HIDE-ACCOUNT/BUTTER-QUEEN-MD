@@ -1,7 +1,7 @@
 const { tlang, botpic, cmd, prefix, runtime, Config, formatp, fetchJson } = require('../lib')
 const Esana = require('@sl-code-lords/esana-news');
 var api = new Esana()
-
+//---------------------------------------------------------------------------
 cmd({
     pattern: 'esana',
     alias: ['esananews','news'],
