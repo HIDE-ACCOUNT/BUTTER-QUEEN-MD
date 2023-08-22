@@ -26,7 +26,8 @@ cmd({
             desc: "Downloads telegram stickers.",
             category: "downloader",
             filename: __filename,
-            use: '<add sticker url.>'
+            use: '<add sticker url.>',
+	    react: '🧚‍♂️'
         },
         async(Void, citel, text) => {
 		if (!text) return await citel.reply("_Enter a tg sticker url_\nEg: .tgs https://t.me/addstickers/Oldboyfinal\nKeep in mind that there is a chance of ban if used frequently");
@@ -70,8 +71,9 @@ cmd({
             desc: "Downloads fb videos  .",
             category: "downloader",
             filename: __filename,
-            use: '<add fb url.>'
-        },
+            use: '<add fb url.>',
+            react: '🌹'
+	},
 
         async(Void, citel, text) => {
           if(!text) return citel.reply(`*_Please Give me Facebook Video Url_*`);
@@ -244,7 +246,8 @@ cmd({
             category: "downloader",
             filename: __filename,
             use: '<add sticker url.>',
-        },
+            react: '💃'
+},
 
         async(Void, citel, text) => {
         if(!text )return citel.reply("*_Give me App Name_*");
@@ -410,6 +413,7 @@ cmd({
             category: "downloader",
             filename: __filename,
             use: '<faded-Alan Walker>',
+	    react: '🎞️'
         },
         async(Void, citel, text) => {
             if (!text) return citel.reply(`Example : ${prefix}video Back in black`)
@@ -483,6 +487,7 @@ cmd({
             category: "downloader",
             filename: __filename,
             use: '<faded-Alan walker.>',
+	    react: '🎶'
         },
 async(Void, citel, text) => {
    const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };    
@@ -663,6 +668,7 @@ cmd({
             category: "downloader",
             filename: __filename,
             use: '<give text>',
+	    react: '🤭'
         },
         async(Void, citel, text) => {
   
@@ -723,7 +729,8 @@ cmd({
             category: "downloader",
             filename: __filename,
             use: '<yt search text>',
-        },
+            react: '📍'
+  },
         async(Void, citel, text) => {
             let yts = require("secktor-pack");
             if (!text) return citel.reply(`Example : ${prefix}yts WhatsApp Bot by MR-KALINDU`);
