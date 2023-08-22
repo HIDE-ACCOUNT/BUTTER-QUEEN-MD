@@ -440,7 +440,7 @@ cmd({
 		let buttonMessage = {
                         video: fs.readFileSync(`./${randomName}`),
                         mimetype: 'video/mp4',
-                        caption: "💃 BUTTER-QUEEN-MD 💃\n💜CREATED BY KALINDU" + Config.caption ,
+                        caption: "💃 BUTTER-QUEEN-MD 💃\n💜CREATED BY KALINDU" ,
                     }
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
