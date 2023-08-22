@@ -21,7 +21,7 @@ global.website = 'https://github.com/KALINDU-LK/BUTTER-QUEEN-MD' ; //wa.me/+9100
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.imgur.com/NpA3ZsJ.jpeg' ;
 module.exports = {
   sessionName: process.env.SESSION_ID || '',      //Put Your Session Id Here
-  botname: process.env.BOT_NAME || 'ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ²²¹-ᴍᴅ',
+  botname: process.env.BOT_NAME || 'ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ-ᴍᴅ-🧚‍♂️',
   botbgm: process.env.BOT_BGM || 'false',
   ownername:  process.env.OWNER_NAME || `It'x Kalindu`,
   author:  process.env.PACK_AUTHER || '', 
@@ -46,7 +46,7 @@ module.exports = {
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
   REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || "Nh4iTxEH5k3vmHugFqoYktGM",
-  caption :process.env.CAPTION || "\t*•ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ²²¹-ᴍᴅ•* ",   //*『sᴜʙsᴄʀɪʙᴇ • ᴋᴀʟɪᴅᴜ ᴛᴇᴄʜ』*\n youtube.com/@kaliduofficial"),
+  caption :process.env.CAPTION || "\t*🎗️ •ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ-ᴍᴅ• 🎗️* ",   //*『sᴜʙsᴄʀɪʙᴇ • ᴋᴀʟɪᴅᴜ ᴛᴇᴄʜ』*\n youtube.com/@kaliduofficial"),
   OPENAI_API_KEY: process.env.OPENAI_API_KEY ||'' ,
   VERSION: process.env.VERSION || 'v.0.0.3',
   LANG: process.env.THEME || 'BUTTER-QUEEN-MD',
