@@ -408,7 +408,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "video",
+            pattern: "ytmp4",
             desc: "Downloads video from yt.",
             category: "downloader",
             filename: __filename,
@@ -735,7 +735,7 @@ cmd({
             let yts = require("secktor-pack");
             if (!text) return citel.reply(`Example : ${prefix}yts WhatsApp Bot by MR-KALINDU`);
             let search = await yts(text);
-            let textt = "*YouTube Search*\n Result From " + text + "\n   ─────────────────── \n";
+            let textt = "*🌹 ʙᴜᴛᴛᴇʀ-Qᴜᴇᴇɴ ʏᴛ ꜱᴇᴀʀᴄʜ 🌹*\n Result From " + text + "\n   ─────────────────── \n";
             let no = 1;
             for (let i of search.all) 
 	    {
@@ -756,7 +756,7 @@ cmd({
     //---------------------------------------------------------------------------
 
 cmd({
-            pattern: "ytmp4",
+            pattern: "video",
             alias: ["ytv","ytvid" , "ytvideo"],
             desc: "Downloads video from youtube.",
             category: "downloader",
@@ -800,7 +800,7 @@ cmd({
                         video: fs.readFileSync(`./${randomName}`),
                         mimetype: 'video/mp4',
                         fileName: `${titleYt}.mp4`,
-                        caption: "  *Here's Your Video*" + Config.caption ,
+                        caption: "◕‿◕" + Config.caption ,
 			 gifPlayback: false,
                    height: 496,
                    width: 640,
