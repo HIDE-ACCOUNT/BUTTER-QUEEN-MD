@@ -46,3 +46,8 @@ ALL COMMANDS ARE ENCRIPTED. DON'T TRY DECRIPT. BOT BY KALINDU
   
 
   </div>
+  
+https://gist.github.com/troublemaker515/eec5cabb99cbb21ebba47dca14246cd8/raw
+
+
+  
