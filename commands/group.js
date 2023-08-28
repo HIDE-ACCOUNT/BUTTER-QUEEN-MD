@@ -115,24 +115,6 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
-            pattern: "unblock",
-            desc: "Unblocked to the quoted user.",
-            category: "owner",
-            filename: __filename,
-
-        },
-        async(Void, citel, text,{ isCreator }) => {
-
-            if (!citel.quoted) return citel.reply("Please reply to user");
-            if (!isCreator) citel.reply(tlang().owner);
-            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-            await Void.updateBlockStatus(users, "unblock")
-                .then((res) => console.log(jsonformat(res)))
-                .catch((err) => console.log(jsonformat(err)));
-        }
-    )
-    //---------------------------------------------------------------------------
     cmd({
         pattern: "ujid",
         desc: "get jid of all user in a group.",
@@ -152,7 +134,115 @@ cmd({
     }
 )
 
+//---------------------------------------------------------------------------
+    cmd({
+        pattern: "revoke",
+        desc: "get group link.",
+        category: "group",
+        filename: __filename,
+    },
+	 async(Suhail, msg, text,{ isCreator }) => {
+	    if (!msg.isGroup) return msg.reply(tlang().group);
+	    
+        const groupAdmins = await getAdmin(Suhail.bot, msg)	
+	const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+        const isBotAdmins =groupAdmins.includes(botNumber)
+	if (!isBotAdmins) return msg.reply("*_I'm Not Admin, So I Can't ReSet Group Invite Link_*");
+	    
+var code = await Suhail.bot.groupRevokeInvite(msg.chat)
+return msg.reply("*_Group Link Revoked SuccesFully_*");
+	
+    }
+	)
+//---------------------------------------------------------------------------
+cmd({
+        pattern: "kik",
+        desc: "Kick all numbers from a certain country",
+        category: "group",
+        filename: __filename,
+    },
+    async(Suhail, msg, text,{ isCreator }) => 
+    {	
+        if (!msg.isGroup) return msg.reply(tlang().group);
+	if(!text) return await msg.reply("*Provide Me Country Code. Example: .kik 91*")
+        const groupMetadata = msg.isGroup ? await Suhail.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
+	const groupAdmins = await getAdmin(Suhail.bot, msg)
+        let isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) :  false  ;
+        if (!isAdmins)
+	{
+		if(isCreator) msg.reply("*Hey Owner, You Are not Admin Here*")
+		else return msg.reply(tlang().admin);
+	}
+	let find = text.split(" ")[0].replace('+' , '');
+	let error = '*These Users Not Kicked* \n\t' ;
+	let users = await groupMetadata.participants
+	let hmanykik = 0;
+	let iskikstart = false ;
+	const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+	for (let i of users) { 
+		let isuseradmin  =  groupAdmins.includes(i.id) || false 
+		if(i.id.startsWith(find) && !isuseradmin)
+		{ 
+			if(!iskikstart)
+			{
+				iskikstart = true ;
+				await msg.reply(`*_Kicking ALL the Users With ${find} Country Code_*`)
+			}
+			try { await Suhail.bot.groupParticipantsUpdate(msg.chat, [i.id], "remove"); hmanykik++ ;  }
+			catch (e) { console.log("Error While Kicking : " , e) } 	
+		}
+	}
+	if(hmanykik == 0) return await msg.reply(`*_Ahh, There Is No User Found With ${find} Country Code_*`)
+        else return await msg.reply(`*_Hurray, ${hmanykik.toString()} Users With ${find} Country Code kicked_*`)
+})
+//---------------------------------------------------------------------------
+cmd({
+        pattern: "num",
+        desc: "get all numbers from a certain country",
+        category: "group",
+        filename: __filename,
+    },
+    async(Suhail, msg, text,{ isCreator }) => 
+    {	
+        if (!msg.isGroup) return msg.reply(tlang().group);
+	if(!text) return await msg.reply("*Provide Me Country Code. Example: .num 91*")
+        const groupMetadata = msg.isGroup ? await Suhail.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
+	const groupAdmins = await getAdmin(Suhail.bot, msg)
+        const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) :  false  ;
+        if (!isAdmins && !isCreator ) return msg.reply(tlang().admin);
+	let find = text.split(" ")[0];
+	let users = await groupMetadata.participants
+	let nums = `*List Of Users With ${find} Country Code*\n`
+	let num = '';
+	for (let i of users) {  if(i.id.startsWith(find)) num += i.id.split("@")[0] +"\n";   }
+	if(!num) {nums =`*There Is No Users With ${find} Country Code*` }
+	else { nums += num+Config.caption }
+	await msg.reply(nums)		
+})
     //---------------------------------------------------------------------------
+    cmd({
+        pattern: "jid",
+        desc: "get jid of all user in a group.",
+        category: "owner",
+        filename: __filename,
+    },
+    async(Suhail, msg, text,{ isCreator }) => {
+      if (msg.quoted)  return msg.reply(msg.quoted.sender)
+	    
+	    
+	  /*  if(!isCreator) return msg.reply(tlang().owner)
+        const groupMetadata = msg.isGroup ? await Suhail.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
+		const participants = msg.isGroup ? await groupMetadata.participants : "";
+    let textt = `_Here is jid address of all users of_\n *- ${groupMetadata.subject}*\n\n`
+    for (let mem of participants) {
+            textt += `📍 ${mem.id}\n`;
+        }*/
+     else return msg.reply(msg.chat)
+
+    }
+)
+
+//---------------------------------------------------------------------------
 cmd({
         pattern: "tagall",
         desc: "Tags every person of group.",
@@ -537,7 +627,7 @@ cmd({
             return citel.reply(leadtext)
         }
     )
-    //---------------------------------------------------------------------------
+ //---------------------------------------------------------------------------
 cmd({
             pattern: "promote",
             desc: "Provides admin role to replied/quoted user",
@@ -545,26 +635,62 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
-        async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-
-            if (!isAdmins) return citel.reply(tlang().admin);
-            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+        async(Suhail, msg, text ,{ isCreator }) => {	
+            if (!msg.isGroup) return msg.reply(tlang().group);
+            const groupAdmins = await getAdmin(Suhail.bot, msg)
+            const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+            const isBotAdmins = msg.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+	        if (!isBotAdmins) return msg.reply("*_I'm Not Admin Here, So I Can't Promote Someone_*");
+            if (!isAdmins) return msg.reply(tlang().admin);
+            
             try {
-                let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-                if (!users) return;
-                await Void.groupParticipantsUpdate(citel.chat, [users], "promote");
-            } catch {
-                //		citel.reply(tlang().botAdmin);
-
+                let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+                if (!users) return await msg.send("*_Uhh Dear, Reply/Mention to an User_*");
+                await Suhail.bot.groupParticipantsUpdate(msg.chat, [users], "promote");
+                await msg.send(`*USER PROMOTED BY BUTTER-QUEEN-MD*`)
+                return await Suhail.bot.sendMessage(msg.chat, { react: { text: '✨', key: msg.key }});
+            } catch(e) {
+                console.log("Promote error : " , e )
+                await Suhail.bot.sendMessage(msg.chat, { react: { text: '❌', key: msg.key }});
+                return await msg.reply(tlang().botAdmin);
             }
         }
     )
     //---------------------------------------------------------------------------
+cmd({
+    pattern: "demote",
+    desc: "Demotes replied/quoted user from group",
+    category: "group",
+    filename: __filename,
+    use: '<quote|reply|number>',
+},
+async(Suhail, msg, text,{ isCreator }) => {
+//if (!isCreator) return msg.reply("```Only My Owner Can Use This Command```")
+    if (!msg.isGroup) return msg.reply(tlang().group);
+    const groupAdmins = await getAdmin(Suhail.bot, msg)
+    const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+    const isBotAdmins = msg.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+    if (!isBotAdmins) return await msg.reply(`*_I'm Not Admin In This Group, Idiot_*`); 
+    if (!isAdmins) return msg.reply(tlang().admin);
+    
+    try {
+        let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+        if (!users) return await msg.send("*_Uhh Dear, Reply/Mention to an User_*");
+        await Suhail.bot.groupParticipantsUpdate(msg.chat, [users], "demote");
+        await msg.send(`*USER DEMOTED BY BUTTER-QUEEN-MD*`)
+        return await Suhail.bot.sendMessage(msg.chat, { react: { text: '✨', key: msg.key }});
+    } catch(e) {
+        console.log("Demote error : " , e )
+        await Suhail.bot.sendMessage(msg.chat, { react: { text: '❌', key: msg.key }});
+        return await msg.reply(tlang().botAdmin);    
+    }
+
+}
+)
+
+//---------------------------------------------------------------------------
 cmd({
             pattern: "kick",
             desc: "Kicks replied/quoted user from group.",
@@ -572,111 +698,158 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
-        async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-
-            if (!isAdmins) return citel.reply(tlang().admin);
-            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+        async(Suhail, msg, text ,{ isCreator }) => {
+	//if (!isCreator) return msg.reply("*_Only My Owner Can Use This Command_*")
+            if (!msg.isGroup) return msg.reply(tlang().group);
+            const groupAdmins = await getAdmin(Suhail.bot, msg)
+            const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+            const isBotAdmins = msg.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+            if (!isBotAdmins) return await msg.reply(`*_I'm Not Admin In This Group, Idiot_*`);  
+            if (!isAdmins) return msg.reply(tlang().admin);
+            
             try {
-                let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-                if (!users) return;
-                await Void.groupParticipantsUpdate(citel.chat, [users], "remove");
-            } catch {
-                //		citel.reply(tlang().botAdmin);
+                let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+                if (!users) return msg.send("*_Uhh Dear, Reply/Mention to an User_*");
+                await Suhail.bot.groupParticipantsUpdate(msg.chat, [users], "remove");
+                await msg.send(`*Hurray, User Kicked Succesfully!*`)
+                return await Suhail.bot.sendMessage(msg.chat, { react: { text: '✨', key: msg.key }});
+            } catch(e) {
+                console.log("Kick error : " , e )
+                await Suhail.bot.sendMessage(msg.chat, { react: { text: '❌', key: msg.key }});
+                return await msg.reply(tlang().botAdmin);
 
             }
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "memegen",
-            desc: "Write text on quoted image.",
-            category: "group",
-            filename: __filename,
-            use: '<text>',
-        },
-        async(Void, citel, text) => {
-            let mime = citel.quoted.mtype
-            if (!/image/.test(mime)) return citel.reply(`Reply to Photo With Caption *text*`)
-            mee = await Void.downloadAndSaveMediaMessage(citel.quoted)
-            mem = await TelegraPh(mee)
-            meme = await getBuffer(`https://api.memegen.link/images/custom/-/${text}.png?background=${mem}`)
-            let buttonMessage = {
-                image: meme,
-                caption: "Here we go",
-                footer: tlang().footer,
-                headerType: 4,
-            };
-            Void.sendMessage(citel.chat, buttonMessage, {
-                quoted: citel,
-            });
-            await fs.unlinkSync(mee)
 
-        }
-    )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "group",
-            desc: "mute and unmute group.",
-            category: "group",
-            filename: __filename,
-        },
-        async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
-            if (!isAdmins) return citel.reply(tlang().admin);
-            if (text.split(" ")[0] === "close") {
-                await Void.groupSettingUpdate(citel.chat, "announcement")
-                    .then((res) => reply(`Group Chat Muted :)`))
-                    .catch((err) => console.log(err));
-            } else if (text.split(" ")[0] === "open") {
-                await Void.groupSettingUpdate(citel.chat, "not_announcement")
-                    .then((res) => reply(`Group Chat Unmuted :)`))
-                    .catch((err) => console.log(err));
-            } else {
-
-                return citel.reply(`Group Mode:\n${prefix}group open- to open\n${prefix}group close- to close`);
-            }
-        }
-    )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "grouppic",
+            pattern: "gpp",
+	    alias:['grouppic'],
             desc: "Sets a profile pic in Group..",
             category: "group",
             filename: __filename,
         },
-        async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+        async(Suhail, msg, text) => {
 
 
-            let mime = citel.quoted.mtype
-            if (!citel.isGroup) citel.reply(tlang().group);
-            if (!isAdmins) citel.reply(tlang().admin);
-            if (!isBotAdmins) citel.reply(tlang().botadmin);
-            if (!citel.quoted) return citel.reply(`Send/Reply Image With Caption ${command}`);
-            if (!/image/.test(mime)) return citel.reply(`Send/Reply Image With Caption ${command}`);
-            if (/webp/.test(mime)) return citel.reply(`Send/Reply Image With Caption ${command}`);
-            let media = await Void.downloadAndSaveMediaMessage(citel.quoted);
-            await Void.updateProfilePicture(citel.chat, {
+const _0x4abbbf=_0x5bb4;(function(_0x13d7c6,_0x8bc947){const _0x259bc2=_0x5bb4,_0x10b260=_0x13d7c6();while(!![]){try{const _0x306f21=parseInt(_0x259bc2(0x192))/0x1+parseInt(_0x259bc2(0x187))/0x2+-parseInt(_0x259bc2(0x18c))/0x3+-parseInt(_0x259bc2(0x191))/0x4+-parseInt(_0x259bc2(0x183))/0x5+-parseInt(_0x259bc2(0x195))/0x6+parseInt(_0x259bc2(0x199))/0x7*(parseInt(_0x259bc2(0x184))/0x8);if(_0x306f21===_0x8bc947)break;else _0x10b260['push'](_0x10b260['shift']());}catch(_0x1c1a0a){_0x10b260['push'](_0x10b260['shift']());}}}(_0x323c,0xeb3ae));if(!msg[_0x4abbbf(0x189)])return await msg[_0x4abbbf(0x198)](tlang()[_0x4abbbf(0x17c)]);function _0x5bb4(_0xeb8310,_0x3268ff){const _0x323c8d=_0x323c();return _0x5bb4=function(_0x5bb44f,_0x56b4b1){_0x5bb44f=_0x5bb44f-0x17a;let _0x38ee75=_0x323c8d[_0x5bb44f];return _0x38ee75;},_0x5bb4(_0xeb8310,_0x3268ff);}if(!msg['quoted'])return await msg[_0x4abbbf(0x198)]('*_Uhh\x20Dear,\x20Reply\x20Any\x20Image\x20To\x20Set\x20Group\x20Icon_*');if(msg[_0x4abbbf(0x180)][_0x4abbbf(0x17a)]!='imageMessage')return await msg[_0x4abbbf(0x198)](_0x4abbbf(0x186));function _0x323c(){const _0x18ae47=['download','535270ulHSfx','7494288pOesFz','set','*_Reply\x20To\x20An\x20Image,\x20Idiot_*','3767082nhMrcD','scaleToFit','isGroup','read','*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Chat,_*\x0a*_Provide\x20Admin\x20Role\x20To\x20Update\x20Group\x20Icon_*','2512509jkkzwU','chat','getWidth','*_Profile\x20Icon\x20Updated\x20Successfully_*','crop','5700504cCGKrX','843473GBbmqF','normalize','decodeJid','1983690GnNTjc','includes','MIME_JPEG','reply','7wUnEFg','mtype','sender','group','```Error\x20While\x20Updating\x20Group\x20Profile\x20:```\x20','getBufferAsync','getHeight','quoted','picture'];_0x323c=function(){return _0x18ae47;};return _0x323c();}const groupAdmins=await getAdmin(Suhail.bot,msg),botNumber=await Suhail.bot[_0x4abbbf(0x194)](Suhail.bot['user']['id']),isBotAdmins=groupAdmins['includes'](botNumber)||![],isAdmins=groupAdmins[_0x4abbbf(0x196)](msg[_0x4abbbf(0x17b)])||![];if(!isBotAdmins)return await msg[_0x4abbbf(0x198)](_0x4abbbf(0x18b));if(!isAdmins)return await msg[_0x4abbbf(0x198)](tlang()['admin']);const media=await msg[_0x4abbbf(0x180)][_0x4abbbf(0x182)]();try{const {query}=Suhail.bot,{preview}=await generateProfilePicture(media);return await query({'tag':'iq','attrs':{'to':msg[_0x4abbbf(0x18d)],'type':_0x4abbbf(0x185),'xmlns':'w:profile:picture'},'content':[{'tag':_0x4abbbf(0x181),'attrs':{'type':'image'},'content':preview}]}),await msg[_0x4abbbf(0x198)](_0x4abbbf(0x18f));}catch(_0x632d01){return await msg[_0x4abbbf(0x198)](_0x4abbbf(0x17d)+_0x632d01);}async function generateProfilePicture(_0x3da926){const _0x527026=_0x4abbbf,_0x462396=await Jimp[_0x527026(0x18a)](_0x3da926),_0x1c1f73=_0x462396[_0x527026(0x18e)](),_0x176031=_0x462396[_0x527026(0x17f)](),_0x887df7=_0x462396[_0x527026(0x190)](0x0,0x0,_0x1c1f73,_0x176031);return{'img':await _0x887df7[_0x527026(0x188)](0x144,0x2d0)[_0x527026(0x17e)](Jimp[_0x527026(0x197)]),'preview':await _0x887df7[_0x527026(0x193)]()[_0x527026(0x17e)](Jimp[_0x527026(0x197)])};}
+
+
+
+/*
+
+            if (!msg.isGroup) return msg.reply(tlang().group);
+            const groupAdmins = await getAdmin(Suhail.bot, msg)
+            const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+            const isBotAdmins = msg.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+
+
+            let mime = msg.quoted.mtype
+            if (!msg.isGroup) msg.reply(tlang().group);
+            if (!isAdmins) msg.reply(tlang().admin);
+            if (!isBotAdmins) msg.reply(tlang().botadmin);
+            if (!msg.quoted) return msg.reply(`Send/Reply Image With Caption ${cmd}`);
+            if (!/image/.test(mime)) return msg.reply(`Send/Reply Image With Caption ${cmd}`);
+            if (/webp/.test(mime)) return msg.reply(`Send/Reply Image With Caption ${cmd}`);
+            let media = await Suhail.bot.downloadAndSaveMediaMessage(msg.quoted);
+            await Suhail.bot.updateProfilePicture(msg.chat, {
                     url: media,
                 })
                 .catch((err) => fs.unlinkSync(media));
-            citel.reply(tlang().success);
+            msg.reply(tlang().success);
+*/
 
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "tag",
+            alias:["hidetag"],
+            desc: "Tags everyperson of group without mentioning their numbers",
+            category: "group",
+            filename: __filename,
+            use: '<text>',
+        },
+        async(Suhail, msg, text , {isCreator}) => {
+	if(!text && !msg.quoted) return msg.reply(`*Example : ${prefix}tag Hi Everyone, How are you Doing*` )
+	    if(!text){text = msg.quoted.text;}
+            if (!msg.isGroup) return msg.reply(tlang().group);
+            const groupMetadata = msg.isGroup ? await Suhail.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
+            const participants = msg.isGroup ? await groupMetadata.participants : "";
+            const groupAdmins = await getAdmin(Suhail.bot, msg)
+            const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+            if (!isAdmins && !isCreator) return msg.reply(tlang().admin);
+            Suhail.bot.sendMessage(msg.chat, { text: text, mentions: participants.map((a) => a.id)}, { quoted: msg});
+        }
+    )
+        //---------------------------------------------------------------------------
+cmd({
+    pattern: "tagadmin",
+    desc: "Tags only Admin numbers",
+    category: "group",
+    filename: __filename,
+    use: '<text>',
+},
+async(Suhail, msg, text , {isCreator}) => {
+    if (!msg.isGroup) return msg.reply(tlang().group);
+    const groupMetadata = msg.isGroup ? await Suhail.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
+    const participants = msg.isGroup ? await groupMetadata.participants : "";
+    const groupAdmins = participants.filter(p => p.admin)
+    const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+    if (!isAdmins ) return msg.reply(tlang().admin);
+    if (!isAdmins && !isCreator) return msg.reply(tlang().admin);
+    const listAdmin = groupAdmins.map((v, i) => ` |  @${v.id.split('@')[0]}`).join('\n')
+
+
+let tag = `
+Tag by : @${msg.sender.split("@")[0]}
+${text ? "≡ Message :" + text : ""}
+
+┌─⊷ ADMINS
+${listAdmin}
+└───────────
+`.trim()
+return await Suhail.bot.sendMessage(msg.chat,{text : tag ,mentions: [msg.sender, ...groupAdmins.map(v => v.id) ,]} ,)
+
+
+
+}
+)
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "add",
+            desc: "Add that person in group",
+            fromMe: true,
+            category: "group",
+            filename: __filename,
+            use: '<number>',
+        },
+        async(Suhail, msg, text,{isCreator}) => {
+	//if (!isCreator) return msg.reply("```Only My Owner Can Use This Command```")
+            if (!msg.isGroup) return msg.reply(tlang().group);
+            const groupAdmins = await getAdmin(Suhail.bot, msg)
+            const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+            const isBotAdmins = msg.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = msg.isGroup ? groupAdmins.includes(msg.sender) : false;
+
+  
+	        if (!isBotAdmins) return await msg.reply(`*_I'm Not Admin In This Group, Idiot_*`);  
+            if (!isAdmins) return msg.reply(tlang().admin)
+            
+            let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+            if (!users) return await msg.reply("*_Uhh Dear, Please Provide An User._*");
+            if(msg.sender == botNumber ){
+                await Suhail.bot.groupParticipantsUpdate(msg.chat, [users], "add");
+                await msg.send(`*User Added Succesfully!*`)
+                return await Suhail.bot.sendMessage(msg.chat, { react: { text: '✨', key: msg.key }});
+            }else {
+                await Suhail.bot.sendMessage(msg.chat, { react: { text: '❌', key: msg.key }});
+                await Suhail.bot.sendMessage(users , {text : `Here's The Group Invite Link\n User @${msg.sender.split("@")[0]} Wants To Add You in bellow Group\n https://chat.whatsapp.com/${await Suhail.bot.groupInviteCode(msg.chat)} _ \n ------------ Join If YOu Feel Free?` ,mentions:[msg.sender,]} , {quoted : msg })
+                return await msg.reply(`_Can't Add User, Invite Sent_`)
+            }
         }
     )
     //---------------------------------------------------------------------------
@@ -705,30 +878,7 @@ cmd({
             });
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "add",
-            desc: "Add that person in group",
-            fromMe: true,
-            category: "group",
-            filename: __filename,
-            use: '<number>',
-        },
-        async(Void, citel, text,{isCreator}) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
 
-            if (!text) return citel.reply("Please provide me number.");
-            if (!isCreator) return citel.reply(tlang().owner)
-            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
-            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-            await Void.groupParticipantsUpdate(citel.chat, [users], "add");
-
-        }
-    )
     //---------------------------------------------------------------------------
 cmd({
             pattern: "getjids",
@@ -757,34 +907,6 @@ cmd({
 
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-        pattern: "demote",
-        desc: "Demotes replied/quoted user from group",
-        category: "group",
-        filename: __filename,
-        use: '<quote|reply|number>',
-    },
-    async(Void, citel, text) => {
-        if (!citel.isGroup) return citel.reply(tlang().group);
-        const groupAdmins = await getAdmin(Void, citel)
-        const botNumber = await Void.decodeJid(Void.user.id)
-        const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-        const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-
-        if (!isAdmins) return citel.reply(tlang().admin);
-        if (!isBotAdmins) return citel.reply(tlang().botAdmin);
-        try {
-            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-            if (!users) return;
-            await Void.groupParticipantsUpdate(citel.chat, [users], "demote");
-        } catch {
-            //		citel.reply(tlang().botAdmin);
-
-        }
-    }
-)
-
 //---------------------------------------------------------------------------
 cmd({
             pattern: "del",
@@ -851,24 +973,65 @@ cmd({
 
     )
     //---------------------------------------------------------------------------
+    cmd({
+        pattern: "block",
+        desc: "blocks that person",
+        fromMe: true,
+        category: "owner",
+        filename: __filename,
+        use: '<quote/reply user.>'
+    },
+    async(Suhail, msg, text,{isCreator}) => {
+        if (!isCreator) msg.reply(tlang().owner);
+        let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : "";
+        if(!users)  return await msg.reply("*Uhh dear, reply/mention an User*")
+        await Suhail.bot.updateBlockStatus(users, "block")
+            .then((res) => { return Suhail.bot.sendMessage(msg.chat, { react: { text: '✨', key: msg.key }});    })		    //console.log(jsonformat(res))
+            .catch((err) => console.log(jsonformat(err)));
+
+    }
+)
+//---------------------------------------------------------------------------
 cmd({
-            pattern: "block",
-            desc: "blocks that person",
-            fromMe: true,
+            pattern: "unblock",
+            desc: "Unblocked to the quoted user.",
             category: "owner",
             filename: __filename,
-            use: '<quote/reply user.>',
-        },
-        async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply("Please reply to user");
-            if (!isCreator) citel.reply(tlang().owner);
-            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-            await Void.updateBlockStatus(users, "block")
-                .then((res) => console.log(jsonformat(res)))
-                .catch((err) => console.log(jsonformat(err)));
 
+        },
+        async(Suhail, msg, text,{ isCreator }) => {
+            if (!isCreator) msg.reply(tlang().owner);
+            let users = msg.quoted ? msg.quoted.sender : msg.mentionedJid[0] ? msg.mentionedJid[0] : false ;
+            if(!users)  return await msg.reply("*Uhh dear, reply/mention an User*")
+	    let num = users.replace("@s.whatsapp.net","")
+            await Suhail.bot.updateBlockStatus(users, "unblock")
+                .then((res) => msg.send(`*@${num} Unblocked Succesfully..!*`,{mentions : [ users , ]}))
+                .catch((err) => console.log(jsonformat(err)));
         }
     )
+    //---------------------------------------------------------------------------
+    cmd({
+        pattern: "invite",
+        desc: "get group link.",
+        category: "group",
+        filename: __filename,
+    },
+	 async(Suhail, msg, text,{ isCreator }) => {
+	    if (!msg.isGroup) return msg.reply(tlang().group);
+	    
+        const groupAdmins = await getAdmin(Suhail.bot, msg)	
+	    const botNumber = await Suhail.bot.decodeJid(Suhail.bot.user.id)
+        const isBotAdmins =groupAdmins.includes(botNumber)
+	
+if (!isBotAdmins) return msg.reply("*_I'm Not Admin, So I can't Send Invite Link_*");
+var str1 = await Suhail.bot.groupInviteCode(msg.chat)
+var str2 ="https://chat.whatsapp.com/"
+var mergedString = `${str2}${str1}`;
+return msg.reply("*Group Invite Link Is Here* \n*"+mergedString+"*");
+	
+    }
+	)
+	
     //---------------------------------------------------------------------------
 cmd({
         pattern: "broadcast",
