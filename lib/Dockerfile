@@ -1,6 +1,6 @@
 FROM quay.io/sampandey001/secktor
-RUN git clone https://github.com/KALINDU-LK/BUTTER-QUEEN-MD /root/KALINDU-LK
-WORKDIR /root/KALINDU-LK/
+RUN git clone https://github.com/MR-KALINDU/BUTTER-QUEEN-MD /root/MR-KALINDU
+WORKDIR /root/MR-KALINDU/
 RUN npm install npm@latest
 RUN yarn install --network-concurrency 1
 EXPOSE 8000
